@@ -34,32 +34,78 @@
         </div>
         <div class = "col-md-8">
             <div class = "row">
-                <div class="card offset-md-1" style="width: 100%;">
+                <div class="card offset-md-1 Card-Body" style="width: 100%; height:280px">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
+                        <h5 class="card-title" id = "City-date">123</h5>
                         <p class="card-text" id = "Temperature">123</p>
                         <p class="card-text" id = "Humidity">456</p>
                         <p class="card-text" id = "Wind-Speed">456</p>
                         <p class="card-text" id = "UV-Index">456</p>
-                        <br>
                     </div>
-                  </div>
-            </div>
-            <div class = "row">
+                </div>
+                <p id="five-day" class="offset-md-1 five-day"><strong>5 Day Forecast</strong></p>
 
             </div>
-
+                <div class = "row" id = five-day-forecast>
+                    <div class="card offset-md-1 card-fiveday" style="width: 17%; height:218px;">
+                        <div class="card-body" id = "date1">
+                            <p class="card-text" id = "City-date-1" style = "margin-top:-10px;font-size:20px;"><strong>08/16/2019</strong></p>
+                            <p class="card-text img" id = "Icon-1">123</p>
+                            <p class="card-text" id = "Temp-1">456</p>
+                            <p class="card-text" id = "Humidity-1">456</p>
+                        </div>
+                    </div>
+                    
+                    <!-- <div class="card card-fiveday" style="width: 17%; height:218px; margin-left:1%">
+                        <div class="card-body" id = "date2">
+                        </div>
+                    </div>
+                    <div class="card card-fiveday" style="width: 17%; height:218px;margin-left:1%">
+                        <div class="card-body" id = "date3">
+                        </div>
+                    </div>
+                    <div class="card card-fiveday" style="width: 17%; height:218px;margin-left:1%">
+                        <div class="card-body" id = "date4">
+                        </div>
+                    </div>
+                    <div class="card card-fiveday" style="width: 17%; height:218px;margin-left:1%">
+                        <div class="card-body" id = "date5">
+                        </div>
+                    </div> -->
+                    
+                </div>
         </div>
-
-
-
     </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     
     <script type="text/javascript">
-      
+        var APIKey = "00bb2f280aeb21cbcb8673b112413305";
+        var defaultCity = "New York"
+        // var queryURL = "https://api.openweathermap.org/data/2.5/weather?q="+defaultCity+",Burundi&appid=00bb2f280aeb21cbcb8673b112413305"
+        cityWeather(defaultCity);        
+        function cityWeather(cityName){
+            var queryURL = "https://api.openweathermap.org/data/2.5/weather?q="+cityName+",Burundi&appid=00bb2f280aeb21cbcb8673b112413305"
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            }).then(function(response) {
+            console.log(response);
+            })
+            // here 
+            // here generate five days broadcast
+            for (var i = 0; i<5; i++){
+                var dateDiv = $("<div>");
+                dateDiv.addClass("card, offset-md-1,card-fiveday")
+      }
+
+        }
+        
+      for (var i = 0; i<5; i++){
+          var dateDiv = $("<div>");
+          dateDiv.addClass("card, offset-md-1,card-fiveday")
+      }
     </script>
   
 </body>
