@@ -1,0 +1,33 @@
+
+/* use padding to change size of jumbotron
+.jumbotron {
+  text-align: center;
+  background-color: black;
+  color: white;
+  border-radius: 0;
+  padding:10px;
+} */
+
+.headjum {
+  text-align: center;
+  background-color: black;
+  color: white;
+  border-radius: 0;
+  padding:10px;
+}
+
+.inputjum{
+  text-align: center;
+  background-color: lightgray;
+  /* height: 450px; */
+  /* width: 400px; */
+  padding : 0px 0px 550px 0px;
+  margin-top: -30px;
+}
+
+.card-title{
+  font-size:40px;
+}
+.card-text{
+  font-size:20px;
+}
