@@ -1,62 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
-      crossorigin="anonymous"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="Assets/style.css" />
     <title>Weather Dashboard</title>
-  </head>
+</head>
 
-  <body>
+<body>
     <!-- <header class="jumbotron"> -->
-    <header class = "jumbotron headjum">
-      <h1 class="display-3">Weather Dashboard</h1>
-      <p id="currentDay" class="lead"></p>
-    </header>   
-    <div class = "row">
-        <div class = "col-md-3 jumbotron inputjum">
+    <header class="jumbotron headjum">
+        <h1 class="display-3">Weather Dashboard</h1>
+        <p id="currentDay" class="lead"></p>
+    </header>
+    <div class="row">
+        <div class="col-md-3 jumbotron inputjum">
 
         </div>
-        <div class = "col-md-8">
-            <div class = "row">
+        <div class="col-md-8">
+            <div class="row">
                 <div class="card offset-md-1 Card-Body" style="width: 100%; height:280px">
                     <div class="card-body">
-                        <h5 class="card-title" id = "City-date">123</h5>
-                        <p class="card-text" id = "Temperature">123</p>
-                        <p class="card-text" id = "Humidity">456</p>
-                        <p class="card-text" id = "Wind-Speed">456</p>
-                        <p class="card-text" id = "UV-Index">456</p>
+                        <h5 class="card-title" id="City-date"></h5>
+                        <p class="card-text" id="Temperature"></p>
+                        <p class="card-text" id="Humidity"></p>
+                        <p class="card-text" id="Wind-Speed"></p>
+                        <p class="card-text" id="UV-Index"></p>
                     </div>
                 </div>
                 <p id="five-day" class="offset-md-1 five-day"><strong>5 Day Forecast</strong></p>
 
             </div>
-                <div class = "row" id = five-day-forecast>
-                    <div class="card offset-md-1 card-fiveday" style="width: 17%; height:218px;">
-                        <div class="card-body" id = "date1">
-                            <p class="card-text" id = "City-date-1" style = "margin-top:-10px;font-size:20px;"><strong>08/16/2019</strong></p>
-                            <p class="card-text img" id = "Icon-1">123</p>
-                            <p class="card-text" id = "Temp-1">456</p>
-                            <p class="card-text" id = "Humidity-1">456</p>
-                        </div>
+            <div class="row" id=five-day-forecast>
+                <div class="card offset-md-1 card-fiveday" style="width: 17%; height:218px;">
+                    <div class="card-body" id="date1">
+                        <p class="card-text" id="City-date-1" style="margin-top:-10px;font-size:20px;">
+                            <strong>08/16/2019</strong></p>
+                        <p class="card-text img" id="Icon-1">123</p>
+                        <p class="card-text" id="Temp-1">456</p>
+                        <p class="card-text" id="Humidity-1">456</p>
                     </div>
-                    
-                    <!-- <div class="card card-fiveday" style="width: 17%; height:218px; margin-left:1%">
+                </div>
+
+                <!-- <div class="card card-fiveday" style="width: 17%; height:218px; margin-left:1%">
                         <div class="card-body" id = "date2">
                         </div>
                     </div>
@@ -72,41 +64,82 @@
                         <div class="card-body" id = "date5">
                         </div>
                     </div> -->
-                    
-                </div>
+
+            </div>
         </div>
     </div>
-
+    <!-- http://api.openweathermap.org/data/2.5/weather?q=Taipei&appid=00bb2f280aeb21cbcb8673b112413305 -->
+    <!-- http://api.openweathermap.org/data/2.5/forecast?q=London,us&mode=xml&appid=00bb2f280aeb21cbcb8673b112413305 -->
+    <!-- http://api.openweathermap.org/data/2.5/uvi?lat=37.75&lon=-122.37&appid=00bb2f280aeb21cbcb8673b112413305 -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    
     <script type="text/javascript">
         var APIKey = "00bb2f280aeb21cbcb8673b112413305";
         var defaultCity = "New York"
-        // var queryURL = "https://api.openweathermap.org/data/2.5/weather?q="+defaultCity+",Burundi&appid=00bb2f280aeb21cbcb8673b112413305"
-        cityWeather(defaultCity);        
-        function cityWeather(cityName){
-            var queryURL = "https://api.openweathermap.org/data/2.5/weather?q="+cityName+",Burundi&appid=00bb2f280aeb21cbcb8673b112413305"
+
+        cityWeather(defaultCity, APIKey);
+
+        function cityWeather(cityName, APIKey) {
+            var dailyQueryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + ",us&appid=" + APIKey;
+            var forecastQueryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + cityName + ",us&mode=xml&appid=" + APIKey;
             $.ajax({
-                url: queryURL,
+                url: dailyQueryURL,
                 method: "GET"
-            }).then(function(response) {
-            console.log(response);
+            }).then(function (response) {
+                // console.log(response);
+                var time = moment().format('MMMM Do YYYY');
+
+                $("#City-date").text(cityName + " (" + time + ")");
+                //alt+176 can create degree symbol!!
+                //https://www.alt-codes.net/degree_sign_alt_code.php
+                $("#Temperature").text("Temperature: "+(parseInt(response.main.temp) * 9 / 5 - 459.67).toFixed(2)+"°F");
+                $("#Humidity").text("Humidity: "+response.main.humidity+"%");
+                $("#Wind-Speed").text("Wind Speed: "+response.wind.speed+"MPH");
+                var UVIQueryURL = "http://api.openweathermap.org/data/2.5/uvi?lat="+response.coord.lat+"&lon="+response.coord.lon+"&appid="+APIKey;
+                $.ajax({
+                    url:UVIQueryURL,
+                    method: "GET"
+                }).then(function(responseUV){
+                    // console.log(responseUV);
+                    $("#UV-Index").text("UV Index: "+responseUV.value);
+                    //color reference:
+                    //https://19january2017snapshot.epa.gov/sunsafety/uv-index-scale-1_.html
+                    if(responseUV.value > 6){
+                        $("#UV-Index").addClass("badge badge-danger");
+                    }else if(responseUV.value > 2 || responseUV.value < 6){
+                        $("#UV-Index").addClass("badge badge-warning");
+                    }else{
+                        $("#UV-Index").addClass("badge badge-success");
+                    }
+                })
             })
+
+            $.ajax({
+                url: forecastQueryURL,
+                method: "GET"
+            }).then(function (response1) {
+                console.log(response1);
+            })
+
+            // var temp = response.main.temp-273;
+            // var humid = response.main.humid;
+            // var windSp = response.wind.speed;
+            // var UVIndex = 
             // here 
             // here generate five days broadcast
-            for (var i = 0; i<5; i++){
-                var dateDiv = $("<div>");
-                dateDiv.addClass("card, offset-md-1,card-fiveday")
-      }
+            //         for (var i = 0; i<5; i++){
+            //             var dateDiv = $("<div>");
+            //             dateDiv.addClass("card, offset-md-1,card-fiveday")
+            //   }
 
         }
-        
-      for (var i = 0; i<5; i++){
-          var dateDiv = $("<div>");
-          dateDiv.addClass("card, offset-md-1,card-fiveday")
-      }
+
+    //   for (var i = 0; i<5; i++){
+    //       var dateDiv = $("<div>");
+    //       dateDiv.addClass("card, offset-md-1,card-fiveday")
+    //   }
     </script>
-  
+
 </body>
+
 </html>
