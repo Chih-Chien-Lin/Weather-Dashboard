@@ -77,12 +77,14 @@
             // var city = city_temp.split(",");
             if (city_temp !== null) {
                 for (var i = 0; i < city_temp.length; i++) {
+                    var div = $("<div>")
+                    div.addClass("row")
                     var cityButton = $("<button>");
                     citys.push(city_temp[i]);
-                    console.log("citys: "+citys);
-                    console.log(typeof(citys));
                     cityButton.text(city_temp[i]);
-                    $("#city-button").append(cityButton);
+                    cityButton.attr("style","width:80%")
+                    div.append(cityButton);
+                    $("#city-button").append(div);
                 }
             }
             console.log("citys: "+citys);
@@ -97,14 +99,19 @@
             console.log("citys_add: "+citys);
             $("#city-button").empty();
             localStorage.removeItem("city-names");
-            
+
             // localStorage.removeItem("city-names");
             localStorage.setItem("city-names", JSON.stringify(citys));
 
             for (var i = 0; i < citys.length; i++) {
+                var div = $("<div>")
+                    div.addClass("row")
                 var cityButton = $("<button>");
                 cityButton.text(citys[i]);
-                $("#city-button").append(cityButton);
+                cityButton.attr("style","width:80%")
+                div.append(cityButton);
+                $("#city-button").append(div);
+                
             }
 
             if ($("#five-day-forecast").text() !== "") {
