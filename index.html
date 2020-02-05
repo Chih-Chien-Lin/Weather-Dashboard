@@ -16,19 +16,24 @@
 <body>
     <!-- <header class="jumbotron"> -->
     <header class="jumbotron headjum">
-        <h1 class="display-3">Weather Dashboard</h1>    
+        <h1 class="display-3">Weather Dashboard</h1>
         <p id="currentDay" class="lead"></p>
     </header>
     <div class="row">
         <div class="col-md-3 jumbotron inputjum">
             <h3>Search for a City:</h3>
             <div class="input-group mb-3 offset-md-1 col-md-11">
-                <input type="text" class="form-control" placeholder="City Name" id="input">
+                <input type="text" class="form-control col-md-12" placeholder="City Name" id="input">
                 <div class="input-group-append">
                     <!-- <button class="btn btn-outline-secondary" type="button">button</button> -->
-                    <button class="btn btn-primary btn-outline-secondary" id = "search-button"><i class="fa fa-search" aria=hidden-
-                            true></i></button>
+                    <button class="btn btn-primary btn-outline-secondary" id="search-button"><i class="fa fa-search"
+                            aria=hidden- true></i></button>
                 </div>
+
+                <div class = "col-md-12" id="city-button">
+
+                </div>
+
             </div>
 
         </div>
@@ -59,14 +64,56 @@
     <script type="text/javascript">
         var APIKey = "00bb2f280aeb21cbcb8673b112413305";
         var defaultCity = "New York"
-
+        var citys = [];
         cityWeather(defaultCity, APIKey);
-        $("#search-button").on("click",search)
+        $("#search-button").on("click", search)
+        getLocalStorage();
 
-        function search(){
+        function getLocalStorage() {
+            var city_temp =JSON.parse(localStorage.getItem("city-names"));
+            console.log(city_temp);
+            // var citys = [];
+            console.log(typeof(citys))
+            // var city = city_temp.split(",");
+            if (city_temp !== null) {
+                for (var i = 0; i < city_temp.length; i++) {
+                    var cityButton = $("<button>");
+                    citys.push(city_temp[i]);
+                    console.log("citys: "+citys);
+                    console.log(typeof(citys));
+                    cityButton.text(city_temp[i]);
+                    $("#city-button").append(cityButton);
+                }
+            }
+            console.log("citys: "+citys);
+            // console.log(typeof(citys))
+        }
+        function search() {
+            console.log("citys: "+citys)
             var cityName = $("#input").val();
-            console.log("cityName: "+cityName);
-            cityWeather(cityName,APIKey);
+            // console.log("cityName: "+cityName)
+            // console.log(typeof(cityName));
+            citys.unshift(cityName);
+            console.log("citys_add: "+citys);
+            $("#city-button").empty();
+            localStorage.removeItem("city-names");
+            
+            // localStorage.removeItem("city-names");
+            localStorage.setItem("city-names", JSON.stringify(citys));
+
+            for (var i = 0; i < citys.length; i++) {
+                var cityButton = $("<button>");
+                cityButton.text(citys[i]);
+                $("#city-button").append(cityButton);
+            }
+
+            if ($("#five-day-forecast").text() !== "") {
+                $("#five-day-forecast").empty();
+                cityWeather(cityName, APIKey);
+            } else {
+                cityWeather(cityName, APIKey);
+            }
+            console.log("cityName: " + cityName);
         }
 
         function cityWeather(cityName, APIKey) {
@@ -123,7 +170,7 @@
                         $("#UV-Index").addClass("badge badge-danger");
                     } else if (responseUV.value > 3 && responseUV.value < 6) {
                         $("#UV-Index").addClass("badge badge-warning");
-                    } else if(responseUV.value < 3){
+                    } else if (responseUV.value < 3) {
                         $("#UV-Index").addClass("badge badge-success");
                     }
                 })
@@ -161,7 +208,7 @@
                         p1.text(date);
                         var img = $("<img>");
                         img.addClass("img");
-                        img.attr("src",iconURL);
+                        img.attr("src", iconURL);
                         img.text("image");
                         var p2 = $("<p>");
                         p2.addClass("card-text");
@@ -181,7 +228,7 @@
 
         }
 
-    
+
     </script>
 
 </body>
