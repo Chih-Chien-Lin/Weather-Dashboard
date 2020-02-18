@@ -125,7 +125,7 @@
 
         function cityWeather(cityName, APIKey) {
             var dailyQueryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + ",us&appid=" + APIKey;
-            var forecastQueryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + cityName + ",us&mode=xml&appid=" + APIKey;
+            var forecastQueryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + ",us&mode=xml&appid=" + APIKey;
             $.ajax({
                 url: dailyQueryURL,
                 method: "GET"
@@ -136,7 +136,7 @@
                 var icon = response.weather[0].icon;
                 // var icon = "10n";
                 console.log("icon: " + icon);
-                var iconURL = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+                var iconURL = "https://openweathermap.org/img/wn/" + icon + "@2x.png";
                 console.log(iconURL);
                 // $("#City-date").attr("src",iconURL);
                 $("#City-date").text(cityName + " (" + time + ")");
@@ -163,7 +163,7 @@
                 $("#Humidity").text("Humidity: " + response.main.humidity + "%");
                 $("#Wind-Speed").text("Wind Speed: " + response.wind.speed + "MPH");
                 // following section works on UV index
-                var UVIQueryURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" + response.coord.lat + "&lon=" + response.coord.lon + "&appid=" + APIKey;
+                var UVIQueryURL = "https://api.openweathermap.org/data/2.5/uvi?lat=" + response.coord.lat + "&lon=" + response.coord.lon + "&appid=" + APIKey;
                 $.ajax({
                     url: UVIQueryURL,
                     method: "GET"
@@ -182,7 +182,7 @@
                     }
                 })
                 // following section works on forecast section
-                var forecastQueryURL = "http://api.openweathermap.org/data/2.5/forecast?id=" + cityID + "&appid=" + APIKey;
+                var forecastQueryURL = "https://api.openweathermap.org/data/2.5/forecast?id=" + cityID + "&appid=" + APIKey;
                 $.ajax({
                     url: forecastQueryURL,
                     method: "GET"
@@ -198,7 +198,7 @@
                         var weather = response1.list[j].weather.main;
                         var icon = response1.list[j].weather[0].icon;
                         var div = $("<div>");
-                        var iconURL = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+                        var iconURL = "https://openweathermap.org/img/wn/" + icon + "@2x.png";
 
                         // if (i===0){
                         div.addClass("card mr-2 col-md-2 bg-primary text-white");
